@@ -3,12 +3,19 @@
 makeCacheMatrix <- function(x = matrix()) {
   inv <- NULL
   set <- function(y) {
+    ## <<- operator which can be used to assign a value to an object 
+    ## in an environment that is different from the current environment
     x <<- y
     inv <<- NULL
   }
   get <- function() x
   setInverse <- function(inverse) inv <<- inverse
   getInverse <- function() inv
+  ## which is really a list containing a function to
+  ## set the matrix
+  ## get the matrix content
+  ## set the value of inverse matrix
+  ## get the value of inverse matrix
   list(set = set,
        get = get,
        setInverse = setInverse,
@@ -32,7 +39,11 @@ cacheSolve <- function(x, ...) {
   }
   data <- x$get()
   inv <- solve(data)
+  ## Computing the inverse of a square matrix 
+  ## can be done with the solve function in R
   x$setInverse(inv)
+  ## sets the value of the inverse in the cache 
+  ## via the setInverse function
   inv
 }
 
